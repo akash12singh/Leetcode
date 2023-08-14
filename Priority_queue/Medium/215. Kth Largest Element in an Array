@@ -1,0 +1,28 @@
+Problem Link: https://leetcode.com/problems/kth-largest-element-in-an-array/
+Approach: 
+
+Method 1: 
+
+Brute Force : Simply sort the vector and then return element at k - 1 as vector is 0 based 
+Code: sort(v.begin(), v.end());
+      return v[k-1]
+
+Method 2:
+
+1)Declare a Min priority queue
+2)Push all the elements in Min priority queue
+3)Now remove first (size of vector - k) elements // example if size = 6 and k = 2 then remove first 4 elements and 5th will be ans
+4)The top element will be our ans
+5)return as queue.top()
+
+Code: 
+    int findKthLargest(vector<int>& nums, int k) {
+        priority_queue<int,	vector<int>,greater<int>>	min_heap; //Min proirity queue
+        for(auto i : nums)
+            min_heap.push(i);
+        int index = nums.size() - k ;
+        while(index--)
+            min_heap.pop();
+        return min_heap.top();
+
+Method 3: 
